@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# Data and model files
+*.pth
+*.h5
+*.ckpt
+*.onnx
+
+# Dataset folders (customize as needed)
+data/
+*.jpg
+*.jpeg
+.gradio/
+data/
+
+# Logs and outputs
+*.log
+logs/
+output/
+runs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Mapping files
+id_to_idx.json
