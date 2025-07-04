@@ -161,23 +161,34 @@ data/
 face/
 │
 ├── src/
-│   ├── augmentations.py      # Data augmentation and transforms
-│   ├── dataset.py            # Custom PyTorch dataset
-│   ├── model.py              # DualHeadFaceNet model definition (gender head used)
-│   ├── train.py              # Training loop
-│   ├── predict.py            # Single-image gender prediction
-│   ├── realtime_predict.py   # Real-time webcam gender prediction
+│   ├── augmentations.py        # Data augmentation and transforms
+│   ├── dataset.py              # Custom PyTorch dataset (supports both tasks)
+│   ├── model.py                # DualHeadFaceNet model definition
+│   ├── train.py                # Training loop
+│   ├── predict.py              # Single-image gender prediction
+│   ├── realtime_predict.py     # Real-time webcam gender prediction
 │   └── __init__.py
 │
-├── run_train.py              # Training entry point
-├── parse_utkface.py          # Script to parse dataset folders into CSV
-├── train.csv                 # Training set CSV (generated)
-├── val.csv                   # Validation set CSV (generated)
-├── model.pt                  # Trained model weights (generated)
-├── test.py                   # Evaluation script
-├── .gitignore
+├── data/
+│   └── raw/
+│       └── Task_B/
+│           ├── train/         # Identity folders for Task B training
+│           ├── val/           # Identity folders for Task B validation
+│           └── distorted/     # (Optional) Distorted images for Task B
+│
+├── run_train.py                # Task A training entry point
+├── parse_utkface.py            # Script to parse dataset folders into CSVs
+├── train.csv                   # Task A training set CSV (generated)
+├── val.csv                     # Task A validation set CSV (generated)
+├── identities_train.csv         # Task B training set CSV (generated)
+├── identities_val.csv           # Task B validation set CSV (generated)
+├── model.pt                    # Trained model weights (generated)
+├── test.py                     # Task A evaluation script
+├── evaluate_task_b.py          # Task B evaluation script
+├── requirements.txt
 ├── README.md
-└── model_diagram.png         # Model architecture diagram 
+├── model_diagram.png           # Model architecture diagram
+└── summary.txt                 # Project summary and tech stack
 
 
 ---
