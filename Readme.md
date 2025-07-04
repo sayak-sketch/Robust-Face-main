@@ -1,8 +1,8 @@
 # Face Gender Classification & Face Matching
 
 This repository contains solutions for:
-- **Task A:** Gender Classification (Male/Female)
-- **Task B:** Face Matching (Identity Verification with Distorted Inputs)
+- *Task A:* Gender Classification (Male/Female)
+- *Task B:* Face Matching (Identity Verification with Distorted Inputs)
 
 ---
 
@@ -12,23 +12,23 @@ This repository contains solutions for:
 
 It is recommended to use a Python virtual environment to avoid dependency conflicts:
 
-**On Windows:**
-```sh
+*On Windows:*
+sh
 python -m venv venv
 venv\Scripts\activate
-```
-**On macOS/Linux:**
-```sh
+
+*On macOS/Linux:*
+sh
 python3 -m venv venv
 source venv/bin/activate
-```
+
 
 ### 2. Clone the repository and install dependencies:
-```sh
+sh
 git clone <repo-url>
 cd face
 pip install -r requirements.txt
-```
+
 
 ---
 
@@ -36,14 +36,14 @@ pip install -r requirements.txt
 
 ### 🗂 Dataset Structure
 
-```
+
 data/raw/train/
   ├── male/
   └── female/
 data/raw/val/
   ├── male/
   └── female/
-```
+
 
 ### 📌 Goal
 
@@ -53,34 +53,34 @@ data/raw/val/
 
 ### 🚀 How to Run
 
-1. **Parse the dataset:**
-    ```sh
+1. *Parse the dataset:*
+    sh
     python parse_utkface.py
-    ```
-    This generates `train.csv` and `val.csv`.
+    
+    This generates train.csv and val.csv.
 
-2. **Train the model:**
-    ```sh
+2. *Train the model:*
+    sh
     python run_train.py
-    ```
+    
 
-3. **Evaluate:**
-    ```sh
+3. *Evaluate:*
+    sh
     python test.py train.csv
     python test.py val.csv
-    ```
+    
 
-4. **Single-image prediction:**
-    ```sh
+4. *Single-image prediction:*
+    sh
     python -m src.predict path/to/image.jpg
-    ```
+    
 
-5. **Real-time webcam prediction:**
-    ```sh
+5. *Real-time webcam prediction:*
+    sh
     python -m src.realtime_predict
-    ```
+    
 
-### 📊 Example Results
+### 📊 TaSK A Results
 
 | Split   | Accuracy | Precision | Recall  | F1-score |
 |---------|----------|-----------|---------|----------|
@@ -89,23 +89,47 @@ data/raw/val/
 
 ---
 
+### 📊 Task B Results
+
+| Split   | Accuracy | Precision | Recall  | F1-score |
+|---------|----------|-----------|---------|----------|
+| Train   | 0.4425   | 0.0277    | 0.8399  | 0.0536   |
+| Val     | 0.4773   | 0.0139    | 0.8134  | 0.0273   |
+
+- These results are from running evaluate.py on the current model and dataset.
+- Threshold: 0.5 (cosine similarity)
+- See script output for details.
+
 ## Task B: Face Matching (Multi-Class Recognition with Distorted Inputs)
 
 ### 📁 Dataset Organization
 
-```
-identities/
-  ├── id1/
-  │     ├── img1.jpg
-  │     └── img2.jpg
-  ├── id2/
-  │     └── img1.jpg
-  ...
-distorted/
-  ├── distorted1.jpg
-  ├── distorted2.jpg
-  ...
-```
+
+data/
+  raw/
+    Task_B/
+      train/
+        001_frontal/
+          img1.jpg
+          img2.jpg
+          ...
+        002_frontal/
+          ...
+        ...
+      val/
+        001_frontal/
+          ...
+        002_frontal/
+          ...
+        ...
+      distorted/   # (optional, if present)
+        distorted1.jpg
+        distorted2.jpg
+        ...
+
+
+- Each identity is a folder (e.g., 001_frontal) containing images for that identity.
+- The distorted folder (if present) contains test images for verification.
 
 ### 📌 Goal
 
@@ -120,25 +144,20 @@ distorted/
 
 ### 🚀 How to Run
 
-1. **Train the embedding model** (see your Siamese/Triplet training script).
-2. **Run face matching:**  
-   Use the provided `match_face` function in your codebase:
-   ```python
+1. *Train the embedding model* (see your Siamese/Triplet training script).
+2. *Run face matching:*  
+   Use the provided match_face function in your codebase:
+   python
    identity, label = match_face('distorted/distorted1.jpg', 'identities/', model, transform, threshold=0.7)
    print(f"Predicted identity: {identity}, Match label: {label}")
-   ```
+   
    - Returns the matched identity and whether it’s a positive (1) or negative (0) match.
-
-### 📝 Notes
-
-- The model is not restricted to a fixed set of identities.
-- Embeddings for the same person (even distorted) are close; different people are far apart.
 
 ---
 
 ## Project Structure
 
-```
+
 face/
 │
 ├── src/
@@ -159,7 +178,7 @@ face/
 ├── .gitignore
 ├── README.md
 └── model_diagram.png         # Model architecture diagram 
-```
+
 
 ---
 
